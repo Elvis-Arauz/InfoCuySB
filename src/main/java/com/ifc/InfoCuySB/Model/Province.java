@@ -1,4 +1,5 @@
 package com.ifc.InfoCuySB.Model;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,6 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
-
 @Entity
 @Table(name = "provinces")
 @Data
@@ -23,10 +23,10 @@ import jakarta.persistence.TemporalType;
 @AllArgsConstructor
 public class Province {
     
-   
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "province_id")
+    private Long provinceId;
 
     @NotNull
     @Column(name = "province_name", nullable = false)

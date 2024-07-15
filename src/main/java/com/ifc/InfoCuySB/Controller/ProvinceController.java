@@ -1,8 +1,5 @@
 package com.ifc.InfoCuySB.Controller;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.ifc.InfoCuySB.Model.Province;
@@ -22,37 +19,23 @@ public class ProvinceController {
         return provinceService.getAllProvinces();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Province> getProvinceById(@PathVariable Long id) {
-        Province province = provinceService.getProvinceById(id);
-        if (province != null) {
-            return ResponseEntity.ok(province);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @GetMapping("/{provinceId}")
+    public Province getProvinceById(@PathVariable Long provinceId) {
+        return provinceService.getProvinceById(provinceId);
     }
+
     @PostMapping
-    public ResponseEntity<Province> createProvince(@RequestBody Province province) {
-        if (province.getProvinceName() == null || province.getProvinceName().trim().isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }
-        Province savedProvince = provinceService.createProvince(province);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedProvince);
+    public Province createProvince(@RequestBody Province province) {
+        return provinceService.createProvince(province);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Province> updateProvince(@PathVariable Long id, @RequestBody Province provinceDetails) {
-        Province updatedProvince = provinceService.updateProvince(id, provinceDetails);
-        if (updatedProvince != null) {
-            return ResponseEntity.ok(updatedProvince);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @PutMapping("/{provinceId}")
+    public Province updateProvince(@PathVariable Long provinceId, @RequestBody Province provinceDetails) {
+        return provinceService.updateProvince(provinceId, provinceDetails);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProvince(@PathVariable Long id) {
-        provinceService.deleteProvince(id);
-        return ResponseEntity.noContent().build();
+    @DeleteMapping("/{provinceId}")
+    public void deleteProvince(@PathVariable Long provinceId) {
+        provinceService.deleteProvince(provinceId);
     }
 }

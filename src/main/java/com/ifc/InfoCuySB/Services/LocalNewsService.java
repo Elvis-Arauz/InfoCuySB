@@ -32,7 +32,8 @@ public class LocalNewsService {
     public LocalNews updateLocalNews(Long newsId, LocalNews localNews) {
         localNews.setNewsId(newsId);
         return localNewsRepository.save(localNews);
-    }    
+    }
+      
 
     public void deleteLocalNews(Long newsId) {
         localNewsRepository.deleteById(newsId);

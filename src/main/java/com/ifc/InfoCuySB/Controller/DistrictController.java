@@ -41,7 +41,6 @@ public class DistrictController {
         if (district.isPresent()) {
             District updatedDistrict = district.get();
             updatedDistrict.setDistrictName(districtDetails.getDistrictName());
-            updatedDistrict.setUpdatedAt(districtDetails.getUpdatedAt());
             return ResponseEntity.ok(districtService.save(updatedDistrict));
         } else {
             return ResponseEntity.notFound().build();

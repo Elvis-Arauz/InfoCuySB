@@ -49,7 +49,7 @@ public class LocalNews {
     }
     
     @PreUpdate
-protected void onUpdate() {
-    this.updatedAt = LocalDateTime.now();
+    protected void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
     }
-}
+}    

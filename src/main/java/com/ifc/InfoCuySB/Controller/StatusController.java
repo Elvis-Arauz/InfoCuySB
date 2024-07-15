@@ -9,9 +9,8 @@ import com.ifc.InfoCuySB.Services.StatusService;
 import java.util.List;
 import java.util.Optional;
 
-
 @RestController
-@RequestMapping("/api/statuses")
+@RequestMapping("/api/status")
 public class StatusController {
 
     private final StatusService statusService;
@@ -34,7 +33,6 @@ public class StatusController {
 
     @PostMapping
     public ResponseEntity<Status> createStatus(@RequestBody Status status) {
-        System.out.println("Received Status: " + status); // Log the received status
         if (status.getStatusName() == null || status.getStatusName().isEmpty()) {
             return ResponseEntity.badRequest().body(null);
         }
@@ -43,11 +41,13 @@ public class StatusController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Status> updateStatus(@PathVariable Long id, @RequestBody Status status) {
-        if (!statusService.getStatusById(id).isPresent()) {
+    public ResponseEntity<Status> updateStatus(@PathVariable Long id, @RequestBody Status statusDetails) {
+        Optional<Status> optionalStatus = statusService.getStatusById(id);
+        if (!optionalStatus.isPresent()) {
             return ResponseEntity.notFound().build();
         }
-        status.setStatusId(id);
+        Status status = optionalStatus.get();
+        status.setStatusName(statusDetails.getStatusName());
         Status updatedStatus = statusService.saveStatus(status);
         return ResponseEntity.ok(updatedStatus);
     }

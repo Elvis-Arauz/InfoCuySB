@@ -28,6 +28,19 @@ public class AuthorController {
         Optional<Author> author = authorService.findById(id);
         return author.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<Author> updateAuthor(@PathVariable Long id, @RequestBody Author author) {
+        Optional<Author> existingAuthor = authorService.findById(id);
+        if (existingAuthor.isPresent()) {
+            author.setAuthorId(id);
+            Author updatedAuthor = authorService.save(author);
+            return ResponseEntity.ok(updatedAuthor);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
 
     @PostMapping
     public ResponseEntity<Author> createAuthor(@RequestBody Author author) {

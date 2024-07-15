@@ -2,15 +2,10 @@ package com.ifc.InfoCuySB.Model;
 
 import lombok.*;
 import java.time.LocalDateTime;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
-import jakarta.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "statuses")
@@ -21,8 +16,10 @@ public class Status {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "status_id")
     private Long statusId;
 
+    @JsonProperty("status_name")
     @Column(name = "status_name", nullable = false)
     private String statusName;
 

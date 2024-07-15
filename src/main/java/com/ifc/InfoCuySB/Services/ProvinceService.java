@@ -16,16 +16,16 @@ public class ProvinceService {
         return provinceRepository.findAll();
     }
 
-    public Province getProvinceById(Long id) {
-        return provinceRepository.findById(id).orElse(null);
+    public Province getProvinceById(Long provinceId) {
+        return provinceRepository.findById(provinceId).orElse(null);
     }
 
     public Province createProvince(Province province) {
         return provinceRepository.save(province);
     }
 
-    public Province updateProvince(Long id, Province provinceDetails) {
-        Province province = provinceRepository.findById(id).orElse(null);
+    public Province updateProvince(Long provinceId, Province provinceDetails) {
+        Province province = provinceRepository.findById(provinceId).orElse(null);
         if (province != null) {
             province.setProvinceName(provinceDetails.getProvinceName());
             return provinceRepository.save(province);
@@ -33,7 +33,7 @@ public class ProvinceService {
         return null;
     }
 
-    public void deleteProvince(Long id) {
-        provinceRepository.deleteById(id);
+    public void deleteProvince(Long provinceId) {
+        provinceRepository.deleteById(provinceId);
     }
 }

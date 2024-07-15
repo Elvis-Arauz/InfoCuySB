@@ -34,6 +34,17 @@ public class TagController {
         Tag savedTag = tagService.save(tag);
         return new ResponseEntity<>(savedTag, HttpStatus.CREATED);
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<Tag> updateTag(@PathVariable Long id, @RequestBody Tag tag) {
+        Optional<Tag> existingTag = tagService.findById(id);
+        if (existingTag.isPresent()) {
+            tag.setTagId(id);
+            Tag updatedTag = tagService.save(tag);
+            return ResponseEntity.ok(updatedTag);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTag(@PathVariable Long id) {

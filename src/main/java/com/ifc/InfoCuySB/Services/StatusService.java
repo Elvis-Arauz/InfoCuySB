@@ -13,8 +13,8 @@ public class StatusService {
     private final StatusRepository statusRepository;
 
     @Autowired
-    public StatusService(StatusRepository statusRepository) {
-        this.statusRepository = statusRepository;
+    public StatusService(StatusRepository repository) {
+        statusRepository = repository;
     }
 
     public List<Status> getAllStatuses() {
